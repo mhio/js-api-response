@@ -4,7 +4,7 @@
   "description": "API Response Class",
   "main": "index.js",
   "repository": "https://github.com/mh/node-api-response",
-  "author": "MH",
+  "author": "mh",
   "license": "MIT",
   "private": false,
   "scripts": {
