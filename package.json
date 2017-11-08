@@ -1,0 +1,27 @@
+{
+  "name": "@mh/api-response",
+  "version": "0.0.1",
+  "description": "API Response Class",
+  "main": "index.js",
+  "repository": "https://github.com/mh/node-api-response",
+  "author": "MH",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "mocha test/unit test/int",
+    "test:unit": "mocha test/int",
+    "test:int": "mocha test/unit",
+    "test:coverage": "nyc _mocha test/unit test/int && nyc report -r html && nyc check-coverage",
+    "test:watch": "nodemon -x mocha test/unit test/int",
+    "release:test": "set -uex; yarn test; npm version prerelease; npm publish --tag testing",
+    "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; npm version patch; git push; npm publish; git push --tags"
+  },
+  "dependencies": {
+    "@mh/api-message": "^0.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0"
+  }
+}
