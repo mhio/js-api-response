@@ -1,4 +1,4 @@
-const debug = require('debug')('mh:koa:Response')
+const debug = require('debug')('mh:Api:Response')
 const { Message, MessageData } = require('./Message')
 
 
