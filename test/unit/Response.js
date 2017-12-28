@@ -9,5 +9,6 @@ describe('mh::test::Unit::Response', function () {
   it('should create a Response', function() {
     let r = new Response({ message: {} })
     expect(r).to.be.ok
-  });
+  })
+
 })
