@@ -2,7 +2,7 @@
   "name": "@mhp/api-response",
   "version": "0.0.2-0",
   "description": "API Response Class",
-  "main": "index.js",
+  "main": "Response.js",
   "repository": "https://github.com/mh/node-api-response",
   "author": "mh",
   "license": "MIT",
