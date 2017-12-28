@@ -17,11 +17,18 @@
     "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; npm version patch; git push; npm publish --access restricted; git push --tags"
   },
   "dependencies": {
-    "@mhp/api-message": "0.0.3-10"
+    "@mhp/api-message": "0.0.3"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0"
+  },
+  "nyc": {
+    "per-file": true,
+    "lines": 99,
+    "statements": 99,
+    "functions": 99,
+    "branches": 99
   }
 }

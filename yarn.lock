@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@mhp/api-message@0.0.3-10":
-  version "0.0.3-10"
-  resolved "http://10.8.8.8:4873/@mhp%2fapi-message/-/api-message-0.0.3-10.tgz#cbea815107772280e426bf8eb5bb2c9143498342"
+"@mhp/api-message@0.0.3":
+  version "0.0.3"
+  resolved "http://10.8.8.8:4873/@mhp%2fapi-message/-/api-message-0.0.3.tgz#cb3d8fd1dde59a2f396a918deeb331b4a07d14f2"
   dependencies:
     base62-random "^0.3.5"
 
