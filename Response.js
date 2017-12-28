@@ -1,5 +1,5 @@
 const debug = require('debug')('mh:Api:Response')
-const { Message, MessageData } = require('./Message')
+const { Message, MessageData } = require('@mhp/api-message')
 
 
 // ## Response
@@ -9,6 +9,7 @@ const { Message, MessageData } = require('./Message')
 class Response {
 
   constructor( options ){
+    if (!options) throw new Error('No options passed in')
     this._status = options.status || 200
     this._message = options.message // string for raw or object for json/template
     this._template = options.template

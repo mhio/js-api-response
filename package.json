@@ -1,5 +1,5 @@
 {
-  "name": "@mh/api-response",
+  "name": "@mhp/api-response",
   "version": "0.0.1",
   "description": "API Response Class",
   "main": "index.js",
@@ -17,7 +17,7 @@
     "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; npm version patch; git push; npm publish; git push --tags"
   },
   "dependencies": {
-    "@mh/api-message": "^0.0.1"
+    "@mhp/api-message": "0.0.3-10"
   },
   "devDependencies": {
     "chai": "^4.1.2",
