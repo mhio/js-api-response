@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@mhp/ClassDebug": "~0.0.2",
-    "@mhp/api-message": "0.0.3",
+    "@mhp/api-message": "^0.1.0",
     "lodash": "^4.17.4"
   },
   "devDependencies": {
