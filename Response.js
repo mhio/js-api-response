@@ -37,21 +37,9 @@ class Response {
     this._template = options.template
     this._status = options.status || 200
     this._headers = {}
-    if ( options.hasOwnProperty('message') ){ 
+    if ( options.message !== undefined && options.message !== null ){
       this.setMessage(options.message) // string for raw or object for json/template
     }
-  }
-
-  json( message ){
-    this._type = 'json'
-    if ( message === undefined ) {
-      this.debug('No JSON message, just setting type')
-      return this
-    }
-    this._message = ( message instanceof Message )
-      ? message
-      : new MessageData(message)
-    return this
   }
 
   // headers go in the message for socketio?
@@ -60,16 +48,34 @@ class Response {
     return this
   }
 
-  setTemplate( name ){
+  setTemplate( name, locals ){
+    this._type = 'template'
     this._template = name
+    this.setMessage(locals)
+    return this
+  }
+
+  setRaw( message ){
+    this._type = 'raw'
+    this.setMessage(message)
+    return this
+  }
+
+  setJson( message ){
+    this._type = 'json'
+    this.setMessage(message)
     return this
   }
 
   setMessage( message ){
     switch ( this._type ){
       case 'raw':
-        if ( ! message instanceof String && ! message instanceof Buffer ) {
-          throw new Error('Raw responses must be a String or Buffer')
+        if (
+          typeof message !== 'string' &&
+          message instanceof String === false &&
+          message instanceof Buffer === false
+        ) {
+          throw new Error('Raw responses must be a String or Buffer', typeof message)
         }
         this._message = message
         return this
@@ -93,11 +99,11 @@ class Response {
   }
 
   setType( type ){
-    if ( ! this._types.includes( type ) ) {
+    if ( this._types.includes(type) === false ) {
       throw new Error(`Type "${type}" not in [ ${this._types.join(', ')}]`)
     }
     // Convert an existing message to json
-    if ( type === 'json' && ! this._message instanceof Message ) {
+    if ( type === 'json' && this._message instanceof Message === false ) {
       this._message = new MessageData(this._message)
     }
     this._type = type

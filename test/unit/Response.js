@@ -1,3 +1,4 @@
+/* global expect */
 const { Response, Message } = require('../../Response.js')
 
 describe('mh::test::Unit::Response', function(){
@@ -7,7 +8,7 @@ describe('mh::test::Unit::Response', function(){
   })
 
   it('should create a Response', function(){
-    let r = new Response({ message: {} })
+    let r = new Response({ message: 'm' })
     expect(r).to.be.ok
   })
 
@@ -22,7 +23,7 @@ describe('mh::test::Unit::Response', function(){
     let resp = null
 
     beforeEach(function(){
-      resp = new Response({ message: { data: true }})
+      resp = new Response({ type: 'raw', message: '<html></html>'})
     })
 
     it('should set a message', function(){
@@ -31,7 +32,8 @@ describe('mh::test::Unit::Response', function(){
     })
 
     it('should set a json message', function(){
-      let ret = resp.json({ some: 'data' })
+      resp.setType('json')
+      let ret = resp.setMessage({ some: 'data' })
       //expect( resp._message ).to.eql({})
       expect( resp._message ).to.have.property('id').and.be.a('string')
       expect( resp._message ).to.have.property('ts').and.be.a('number')
@@ -42,7 +44,8 @@ describe('mh::test::Unit::Response', function(){
 
     it('should set a Message as json message', function(){
       let msg = new Message({ some: 'data' })
-      let ret = resp.json(msg)
+      resp.setType('json')
+      let ret = resp.setMessage(msg)
       //expect( resp._message ).to.eql({})
       expect( resp._message ).to.eql(msg)
       expect( ret ).to.eql( resp )
