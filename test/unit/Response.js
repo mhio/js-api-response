@@ -58,12 +58,25 @@ describe('mh::test::Unit::Response', function(){
     })
 
     it('should set a template', function(){
-      let ret = resp.setTemplate('tmplname')
+      let ret = resp.setTemplate('tmplname', { somevar: true })
       expect( resp._template ).to.equal( 'tmplname' )
+      expect( resp._message ).to.eql({ somevar: true })
       expect( ret ).to.eql( resp )
     })
 
+    it('should set a raw response', function(){
+      let ret = resp.setRaw('tmplname')
+      expect( resp._message ).to.equal( 'tmplname' )
+      expect( ret ).to.eql( resp )
     })
+
+    it('should set a json response', function(){
+      let ret = resp.setJson({ wakka:'wakka' })
+      expect( resp._type ).to.equal( 'json' )
+      expect( ret ).to.eql( resp )
+    })
+
+  })
 
   describe('Response json instance', function(){
 
