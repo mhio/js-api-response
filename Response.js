@@ -1,4 +1,4 @@
-const ClassDebug = require('@mhp/ClassDebug').default // es6 export
+const { ClassDebug } = require('@mhp/ClassDebug') // es6 export
 const { Message, MessageData } = require('@mhp/api-message')
 const defaults = require('lodash/defaults')
 
@@ -81,7 +81,11 @@ class Response {
           message instanceof String === false &&
           message instanceof Buffer === false
         ) {
-          throw new Error('Raw responses must be a String or Buffer', typeof message, message.constructor.name)
+          throw new Error(
+            'Raw responses must be a String or Buffer',
+            typeof message,
+            message.constructor.name
+          )
         }
         this._message = message
         return this
