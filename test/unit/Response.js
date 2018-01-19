@@ -1,5 +1,6 @@
 /* global expect */
-const { Response, Message } = require('../../Response.js')
+const { Response, Message, MessageData } = require('../../Response.js')
+
 
 describe('mh::test::Unit::Response', function(){
   
@@ -51,6 +52,11 @@ describe('mh::test::Unit::Response', function(){
       expect( ret ).to.eql( resp )
     })
 
+    it('should fail to set an unkown message type', function(){
+      let fn = () => resp.setType('wat')
+      expect( fn ).to.throw(/not in \[/)
+    })
+
     it('should set a header', function(){
       let ret = resp.setHeader('meee', 'youuuu')
       expect( resp._headers['meee'] ).to.equal( 'youuuu' )
@@ -64,10 +70,52 @@ describe('mh::test::Unit::Response', function(){
       expect( ret ).to.eql( resp )
     })
 
-    it('should set a raw response', function(){
+    it('should set a template from Message', function(){
+      let msg = new MessageData({ somevar: true })
+      let ret = resp.setTemplate('tmplname', msg)
+      expect( resp._template ).to.equal( 'tmplname' )
+      expect( resp._message ).to.eql({ somevar: true })
+      expect( ret ).to.eql( resp )
+    })
+
+    it('should fail to set a template message as non object', function(){
+      let fn = () => resp.setTemplate(null)
+      expect( fn ).to.throw(/must be an object/)
+    })
+
+    it('should set a raw response string', function(){
       let ret = resp.setRaw('tmplname')
       expect( resp._message ).to.equal( 'tmplname' )
       expect( ret ).to.eql( resp )
+    })
+
+    it('should set a raw response String', function(){
+      let str = new String('whatever')
+      let ret = resp.setRaw(str)
+      expect( resp._message ).to.equal( str )
+      expect( ret ).to.eql( resp )
+    })
+
+    it('should set a raw response Buffer', function(){
+      let buf = new Buffer('whatever')
+      let ret = resp.setRaw(buf)
+      expect( resp._message ).to.eql( buf )
+      expect( ret ).to.eql( resp )
+    })
+
+    it('should fail to set an undefined raw response', function(){
+      let fn = () => resp.setRaw()
+      expect( fn ).to.throw(/must be defined/)
+    })
+
+    it('should fail to set an null raw response', function(){
+      let fn = () => resp.setRaw(null)
+      expect( fn ).to.throw(/must not be null/)
+    })
+
+    it('should fail to set an object response', function(){
+      let fn = () => resp.setRaw({})
+      expect( fn ).to.throw(/must be a String or Buffer/)
     })
 
     it('should set a json response', function(){

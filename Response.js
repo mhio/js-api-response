@@ -1,4 +1,4 @@
-const ClassDebug = require('@mhp/ClassDebug').default
+const ClassDebug = require('@mhp/ClassDebug').default // es6 export
 const { Message, MessageData } = require('@mhp/api-message')
 const defaults = require('lodash/defaults')
 
@@ -70,12 +70,18 @@ class Response {
   setMessage( message ){
     switch ( this._type ){
       case 'raw':
+        if ( message === undefined ) {
+          throw new Error('Raw response message must be defined')
+        }
+        if ( message === null ) {
+          throw new Error('Raw response message must not be null')
+        }
         if (
           typeof message !== 'string' &&
           message instanceof String === false &&
           message instanceof Buffer === false
         ) {
-          throw new Error('Raw responses must be a String or Buffer', typeof message)
+          throw new Error('Raw responses must be a String or Buffer', typeof message, message.constructor.name)
         }
         this._message = message
         return this
@@ -88,20 +94,22 @@ class Response {
 
       //? message here?
       case 'template':
+        if ( typeof message !== 'object' ) {
+          throw new Error('Template response message must be an object')
+        }
         this._message = ( message instanceof Message )
           ? message.data
           : message
         return this
     
       default:
-        this._message = message
-        return this
+        throw new Error(`Unknown message type ${this._type}`)
     }
   }
 
   setType( type ){
     if ( this._types.includes(type) === false ) {
-      throw new Error(`Type "${type}" not in [ ${this._types.join(', ')}]`)
+      throw new Error(`Response type "${type}" not in [ ${this._types.join(', ')}]`)
     }
     // Convert an existing message to json
     if ( type === 'json' && this._message instanceof Message === false ) {
