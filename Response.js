@@ -8,7 +8,7 @@ class Response {
   static classInit(){
     /**
      * @namespace ClassDebug
-     * @function debug - Class namespaced debug instance. Controlled with `DEBUG` env var
+     * @function debug - Class namespaced debug instance. Controlled with `DEBUG` env var. https://github.com/visionmedia/debug
     */
     ClassDebug.setup(this, 'mh:api')
   }
