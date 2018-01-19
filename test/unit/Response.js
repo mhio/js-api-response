@@ -161,11 +161,12 @@ describe('mh::test::Unit::Response', function(){
     let resp = null
 
     beforeEach(function(){
-      resp = Response.template({ somedata: true })
+      resp = Response.template('whom', { somedata: true })
     })
 
     it('should set type to template', function(){
       expect( resp._type ).to.equal( 'template' )
+      expect( resp._template ).to.equal( 'whom' )
       expect( resp._message ).to.eql({ somedata: true })
     })
 

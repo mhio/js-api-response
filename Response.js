@@ -2,29 +2,47 @@ const { ClassDebug } = require('@mhp/ClassDebug') // es6 export
 const { Message, MessageData } = require('@mhp/api-message')
 const defaults = require('lodash/defaults')
 
-// ## Response
-
+/** Class to encapsulate a response */
 class Response {
 
   static classInit(){
+    /**
+     * @namespace ClassDebug
+     * @function debug - Class namespaced debug instance. Controlled with `DEBUG` env var
+    */
     ClassDebug.setup(this, 'mh:api')
-    this.prototype.message = this.prototype.setMessage
   }
 
+  /**
+   * @description Create JSON Response
+   * @param {object|Message} data - Data to send as JSON `DataMessage`
+   * @param {object} options - Response options
+   */
   static json( data, options ){
     let opts = { type: 'json', message: data }
     defaults(opts, options)
     return new Response(opts)
   }
 
+  /**
+   * @description Create raw Response
+   * @param {string|Buffer} message - Raw message to send
+   * @param {object} options - Response options
+   */
   static raw( message, options ){
     let opts = { type: 'raw', message: message }
     defaults(opts, options)
     return new Response(opts)
   }
 
-  static template( locals, options ){
-    let opts = { type: 'template', message: locals }
+  /**
+   * @description Create template Response
+   * @param {string} tplname - Template name
+   * @param {object} locals - Template local data
+   * @param {object} options - Response options
+   */
+  static template( tplname, locals, options ){
+    let opts = { type: 'template', template: tplname, message: locals }
     defaults(opts, options)
     return new Response(opts)
   }
@@ -42,31 +60,52 @@ class Response {
     }
   }
 
-  // headers go in the message for socketio?
-  setHeader( name, val ){
-    this._headers[name] = val
+  /**
+   * @description Set a header on the response
+   * @param {string} name - Header name
+   * @param {string} value - Header value
+   */
+  setHeader( name, value ){
+    this._headers[name] = value
     return this
   }
 
-  setTemplate( name, locals ){
+  /**
+   * @description Set the Response as a template
+   * @param {string} tplname - Template name
+   * @param {object} locals - Template local data
+   */
+  setTemplate( tplname, locals ){
     this._type = 'template'
-    this._template = name
+    this._template = tplname
     this.setMessage(locals)
     return this
   }
 
+  /**
+   * @description Set the Response as raw
+   * @param {string|String|Buffer} message - Raw message to send to client
+   */
   setRaw( message ){
     this._type = 'raw'
     this.setMessage(message)
     return this
   }
 
+  /**
+   * @description Set the Response as JSON
+   * @param {any|Message} message - Data to send to the client (as `MessageData`)
+   */
   setJson( message ){
     this._type = 'json'
     this.setMessage(message)
     return this
   }
 
+  /**
+   * @description Set the Response message
+   * @param {any} message - Data to send to the client
+   */
   setMessage( message ){
     switch ( this._type ){
       case 'raw':
@@ -111,6 +150,10 @@ class Response {
     }
   }
 
+  /**
+   * @description Set the Response type
+   * @param {string} type - The type of the message. See {@link MessageData._types}.
+   */
   setType( type ){
     if ( this._types.includes(type) === false ) {
       throw new Error(`Response type "${type}" not in [ ${this._types.join(', ')}]`)
@@ -123,6 +166,7 @@ class Response {
   }
 
 }
+
 Response.classInit()
 
 module.exports = { Response, Message, MessageData }
