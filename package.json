@@ -22,7 +22,7 @@
   "dependencies": {
     "@mhp/ClassDebug": "^0.0.3",
     "@mhp/api-message": "^0.2.0",
-    "lodash": "^4.17.4"
+    "lodash.defaults": "^4.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
