@@ -15,7 +15,7 @@
     "test:watch": "nodemon -x mocha test/unit test/int",
     "watch": "nodemon -x",
     "build": "yarn run build:doc",
-    "build:doc": "jsdoc -c .jsdoc.json -d doc/ Response.js",
+    "build:doc": "jsdoc -c .jsdoc.json -d doc/ src/",
     "release:test": "set -uex; yarn test; npm version prerelease; npm publish --tag testing --access restricted",
     "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; yarn run build:doc; npm version patch; git push; npm publish --access restricted; git push --tags"
   },
