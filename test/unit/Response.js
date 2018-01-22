@@ -1,5 +1,5 @@
 /* global expect */
-const { Response, Message, MessageData } = require('../../src/Response.js')
+const { Response, Message, MessageData } = require('../../')
 
 
 describe('mh::test::Unit::Response', function(){
