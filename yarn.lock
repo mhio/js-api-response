@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@mhp/ClassDebug@~0.0.2":
+"@mhp/ClassDebug@^0.0.3":
   version "0.0.3"
   resolved "http://10.8.8.8:4873/@mhp%2fClassDebug/-/ClassDebug-0.0.3.tgz#f2087cc2c88728242178bf44ffbb1c5fde5b265f"
   dependencies:

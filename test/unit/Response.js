@@ -18,9 +18,19 @@ describe('mh::test::Unit::Response', function(){
     expect( fn ).to.throw(/No options passed to Response/)
   })
 
-  it('should fail to create a Response with null data', function(){
-    let fn = ()=> new Response(null)
-    expect( fn ).to.throw(/No options passed to Response/)
+  it('should fail to create a Response with null message', function(){
+    let r = new Response({ message: null })
+    expect( r ).to.be.ok
+  })
+
+  it('should fail to create a Response with undefined message', function(){
+    let r = new Response({ message: undefined })
+    expect( r ).to.be.ok
+  })
+
+  it('should fail to create a Response with message', function(){
+    let r = new Response({ message: 'rawmessage' })
+    expect( r ).to.be.ok
   })
 
   describe('Response instance', function(){
