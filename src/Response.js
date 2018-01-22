@@ -146,7 +146,7 @@ class Response {
         return this
     
       default:
-        throw new Error(`Unknown message type ${this._type}`)
+        throw new Error(`Unknown message type "${this._type}"`)
     }
   }
 

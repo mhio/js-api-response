@@ -1,5 +1,5 @@
 /* global expect */
-const { Response, Message, MessageData } = require('../../Response.js')
+const { Response, Message, MessageData } = require('../../src/Response.js')
 
 
 describe('mh::test::Unit::Response', function(){
@@ -18,6 +18,10 @@ describe('mh::test::Unit::Response', function(){
     expect( fn ).to.throw(/No options passed to Response/)
   })
 
+  it('should fail to create a Response with null data', function(){
+    let fn = ()=> new Response(null)
+    expect( fn ).to.throw(/No options passed to Response/)
+  })
 
   describe('Response instance', function(){
     
@@ -122,6 +126,12 @@ describe('mh::test::Unit::Response', function(){
       let ret = resp.setJson({ wakka:'wakka' })
       expect( resp._type ).to.equal( 'json' )
       expect( ret ).to.eql( resp )
+    })
+
+    it('should fail to set an invalid message', function(){
+      resp._type = 'nope'
+      let fn = () => resp.setMessage('what')
+      expect( fn ).to.throw(/Unknown message type "nope"/)
     })
 
   })
