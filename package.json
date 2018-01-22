@@ -16,9 +16,9 @@
     "watch": "nodemon -x",
     "build": "yarn run build:doc",
     "build:doc": "jsdoc -c .jsdoc.json -d doc/ src/",
-    "release:test": "set -uex; yarn test; npm version prerelease; npm publish --tag testing --access restricted",
-    "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; yarn run build:doc; npm version patch; npm publish --access restricted",
-    "release:patch2": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; yarn run build:doc; npm version patch; git push; npm publish --access restricted; git push --tags"
+    "release:test": "set -uex; yarn test; npm version prerelease; npm publish --tag testing --access public",
+    "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; yarn run build:doc; npm version patch; npm publish --access public",
+    "release:patch2": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; yarn run build:doc; npm version patch; git push; npm publish --access public; git push --tags"
   },
   "dependencies": {
     "@mhp/ClassDebug": "^0.0.3",
