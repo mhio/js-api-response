@@ -1,6 +1,5 @@
 const { ClassDebug } = require('@mhp/ClassDebug') // es6 export
-const { Message, MessageData } = require('@mhp/api-message')
-//const defaults = require('lodash/defaults')
+const { Message, MessageData } = require('@mhp/Message')
 const defaults = require('lodash.defaults')
 
 /** Class to encapsulate a response */
