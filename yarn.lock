@@ -8,9 +8,9 @@
   dependencies:
     debug "^3.1.0"
 
-"@mhp/api-message@^0.2.0":
-  version "0.2.0"
-  resolved "http://10.8.8.8:4873/@mhp%2fapi-message/-/api-message-0.2.0.tgz#6ce1f9792b62280e98f16ed70ca9caceef07009c"
+"@mhp/Message@^0.3.0":
+  version "0.3.0"
+  resolved "http://10.8.8.8:4873/@mhp%2fMessage/-/Message-0.3.0.tgz#c3a83a29988e54ec2b7f85e700cd163bf4f797ba"
   dependencies:
     base62-random "^0.3.5"
 
