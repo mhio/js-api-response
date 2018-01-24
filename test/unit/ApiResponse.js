@@ -1,44 +1,44 @@
 /* global expect */
-const { Response, Message, MessageData } = require('../../')
+const {ApiResponse, Message, MessageData } = require('../../')
 
 
-describe('mh::test::Unit::Response', function(){
+describe('mh::test::Unit::ApiResponse', function(){
   
-  it('should have a Response', function(){
-    expect(Response).to.be.ok
+  it('should have an ApiResponse', function(){
+    expect(ApiResponse).to.be.ok
   })
 
-  it('should create a Response', function(){
-    let r = new Response({ message: 'm' })
+  it('should create an ApiResponse', function(){
+    let r = new ApiResponse({ message: 'm' })
     expect(r).to.be.ok
   })
 
-  it('should fail to create a Response without data', function(){
-    let fn = ()=> new Response()
-    expect( fn ).to.throw(/No options passed to Response/)
+  it('should fail to create an ApiResponse without data', function(){
+    let fn = ()=> new ApiResponse()
+    expect( fn ).to.throw(/No options passed to ApiResponse/)
   })
 
-  it('should fail to create a Response with null message', function(){
-    let r = new Response({ message: null })
+  it('should fail to create an ApiResponse with null message', function(){
+    let r = new ApiResponse({ message: null })
     expect( r ).to.be.ok
   })
 
-  it('should fail to create a Response with undefined message', function(){
-    let r = new Response({ message: undefined })
+  it('should fail to create an ApiResponse with undefined message', function(){
+    let r = new ApiResponse({ message: undefined })
     expect( r ).to.be.ok
   })
 
-  it('should fail to create a Response with message', function(){
-    let r = new Response({ message: 'rawmessage' })
+  it('should fail to create an ApiResponse with message', function(){
+    let r = new ApiResponse({ message: 'rawmessage' })
     expect( r ).to.be.ok
   })
 
-  describe('Response instance', function(){
+  describe('ApiResponse instance', function(){
     
     let resp = null
 
     beforeEach(function(){
-      resp = new Response({ type: 'raw', message: '<html></html>'})
+      resp = new ApiResponse({ type: 'raw', message: '<html></html>'})
     })
 
     it('should set a message', function(){
@@ -146,27 +146,27 @@ describe('mh::test::Unit::Response', function(){
 
   })
 
-  describe('Response json instance', function(){
+  describe('ApiResponse json instance', function(){
 
     let resp = null
 
     beforeEach(function(){
-      resp = Response.json({ myval: true })
+      resp = ApiResponse.json({ myval: true })
     })
 
-    it('should set the Response type to json with no message', function(){
+    it('should set theApiResponse type to json with no message', function(){
       expect( resp._type ).to.equal( 'json' )
       expect( resp._message ).to.have.property('data').and.eql({ myval: true })
     })
 
   })
 
-  describe('Response raw instance', function(){
+  describe('ApiResponse raw instance', function(){
 
     let resp = null
 
     beforeEach(function(){
-      resp = Response.raw('stringy string')
+      resp = ApiResponse.raw('stringy string')
     })
 
     it('should set type to raw', function(){
@@ -176,12 +176,12 @@ describe('mh::test::Unit::Response', function(){
 
   })
 
-  describe('Response template instance', function(){
+  describe('ApiResponse template instance', function(){
 
     let resp = null
 
     beforeEach(function(){
-      resp = Response.template('whom', { somedata: true })
+      resp =ApiResponse.template('whom', { somedata: true })
     })
 
     it('should set type to template', function(){

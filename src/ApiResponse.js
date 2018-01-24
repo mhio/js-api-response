@@ -4,7 +4,7 @@ const { Message, MessageData } = require('@mhp/api-message')
 const defaults = require('lodash.defaults')
 
 /** Class to encapsulate a response */
-class Response {
+class ApiResponse {
 
   static classInit(){
     /**
@@ -22,7 +22,7 @@ class Response {
   static json( data, options ){
     let opts = { type: 'json', message: data }
     defaults(opts, options)
-    return new Response(opts)
+    return new ApiResponse(opts)
   }
 
   /**
@@ -33,7 +33,7 @@ class Response {
   static raw( message, options ){
     let opts = { type: 'raw', message: message }
     defaults(opts, options)
-    return new Response(opts)
+    return new ApiResponse(opts)
   }
 
   /**
@@ -45,11 +45,11 @@ class Response {
   static template( tplname, locals, options ){
     let opts = { type: 'template', template: tplname, message: locals }
     defaults(opts, options)
-    return new Response(opts)
+    return new ApiResponse(opts)
   }
 
   constructor( options ){
-    if ( !options ) throw new Error('No options passed to Response')
+    if ( !options ) throw new Error('No options passed to ApiResponse')
     this._types = [ 'raw', 'template', 'json' ]
 
     this.setType( options.type || 'raw' ) // 'template', 'json'
@@ -168,6 +168,6 @@ class Response {
 
 }
 
-Response.classInit()
+ApiResponse.classInit()
 
-module.exports = { Response, Message, MessageData }
+module.exports = { ApiResponse, Message, MessageData }
