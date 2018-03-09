@@ -1,13 +1,13 @@
-const { ClassDebug } = require('@mhp/ClassDebug') // es6 export
-const { Message, MessageData, MessageError } = require('@mhp/Message')
+const { ClassDebug } = require('@mhio/class-debug') // es6 export
+const { Message, MessageData, MessageError } = require('@mhio/message')
 const defaults = require('lodash.defaults')
 
 /** Class to encapsulate a response */
 class ApiResponse {
 
-  static classInit(){
+  static _classInit(){
     /**
-     * @namespace ClassDebug
+     * @namespace ApiResponse
      * @function debug - Class namespaced debug instance. Controlled with `DEBUG` env var. https://github.com/visionmedia/debug
     */
     ClassDebug.setup(this, 'mh:api')
@@ -167,6 +167,6 @@ class ApiResponse {
 
 }
 
-ApiResponse.classInit()
+ApiResponse._classInit()
 
 module.exports = { ApiResponse, Message, MessageData, MessageError }

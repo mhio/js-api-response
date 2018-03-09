@@ -1,34 +1,37 @@
 {
-  "name": "@mhp/ApiResponse",
+  "name": "@mhio/api-response",
   "version": "0.2.6",
   "description": "API Response Class",
   "main": "src/ApiResponse.js",
-  "repository": "https://github.com/mh/node-api-response",
-  "author": "mh",
+  "repository": "https://github.com/mh/js-api-response",
+  "author": "Matt Hoyle",
   "license": "MIT",
   "private": false,
   "scripts": {
     "test": "mocha test/unit test/int",
     "test:unit": "mocha test/int",
     "test:int": "mocha test/unit",
+    "test:lint": "eslint src/ test/",
     "test:coverage": "nyc _mocha test/unit test/int && nyc report -r html && nyc check-coverage",
     "test:watch": "nodemon -x mocha test/unit test/int",
     "watch": "nodemon -x",
     "build": "yarn run build:doc",
-    "build:doc": "jsdoc -c .jsdoc.json -d doc/ src/",
+    "build:doc": "set -uex; yarn run build:doc:html; yarn run build:doc:md",
+    "build:doc:html": "jsdoc -c .jsdoc.json -d doc/html src/",
+    "build:doc:md": "jsdoc2md -c ./.jsdoc.json --separators -f src/* > doc/API.md",
     "release:test": "set -uex; yarn test; npm version prerelease; npm publish --tag testing --access public",
-    "release:patch": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; yarn run build:doc; npm version patch; npm publish --access public",
-    "release:patch2": "set -uex; rm -rf node_modules; yarn; yarn run test:coverage; yarn run build:doc; npm version patch; git push; npm publish --access public; git push --tags"
+    "release:patch": "set -uex; git pull; rm -rf node_modules; yarn; yarn run test:coverage; yarn run test:lint; yarn run build:doc; npm version patch; git push; npm publish --access public; git push --tags"
   },
   "dependencies": {
-    "@mhp/ClassDebug": "^0.0.6",
-    "@mhp/Message": "^0.3.0",
+    "@mhio/class-debug": "^0.1.0",
+    "@mhio/message": "^0.3.0",
     "lodash.defaults": "^4.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^4.15.0",
     "jsdoc": "^3.5.5",
+    "jsdoc-to-markdown": "^4.0.1",
     "mocha": "^5.0.0",
     "nyc": "^11.3.0"
   },

@@ -1,3 +1,4 @@
+/* global expect */
 const { ApiResponse, Message, MessageData, MessageError }  = require('../../')
 
 describe('module/package', function(){
