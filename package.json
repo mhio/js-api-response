@@ -1,6 +1,6 @@
 {
   "name": "@mhio/api-response",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "API Response Class",
   "main": "src/ApiResponse.js",
   "repository": "https://github.com/mh/js-api-response",
