@@ -1,6 +1,9 @@
-const { ClassDebug } = require('@mhio/class-debug') // es6 export
+const { ClassDebug } = require('@mhio/class-debug')
 const { Message, MessageData, MessageError } = require('@mhio/message')
+const { Exception } = require('@mhio/exception')
 const defaults = require('lodash.defaults')
+
+class ApiResponseException extends Exception {}
 
 /** Class to encapsulate a response */
 class ApiResponse {
@@ -48,7 +51,7 @@ class ApiResponse {
   }
 
   constructor( options ){
-    if ( !options ) throw new Error('No options passed to ApiResponse')
+    if ( !options ) throw new ApiResponseException('No options passed to ApiResponse')
     this._types = [ 'raw', 'template', 'json' ]
 
     this.setType( options.type || 'raw' ) // 'template', 'json'
@@ -110,20 +113,18 @@ class ApiResponse {
     switch ( this._type ){
       case 'raw':
         if ( message === undefined ) {
-          throw new Error('Raw response message must be defined')
+          throw new ApiResponseException('Raw response message must be defined')
         }
         if ( message === null ) {
-          throw new Error('Raw response message must not be null')
+          throw new ApiResponseException('Raw response message must not be null')
         }
         if (
           typeof message !== 'string' &&
           message instanceof String === false &&
           message instanceof Buffer === false
         ) {
-          throw new Error(
-            'Raw responses must be a String or Buffer',
-            typeof message,
-            message.constructor.name
+          throw new ApiResponseException(
+            `Raw responses must be a String or Buffer, got ${typeof message}. ${message.constructor.name}`,
           )
         }
         this._message = message
@@ -138,7 +139,7 @@ class ApiResponse {
       //? message here?
       case 'template':
         if ( typeof message !== 'object' ) {
-          throw new Error('Template response message must be an object')
+          throw new ApiResponseException('Template response message must be an object')
         }
         this._message = ( message instanceof Message )
           ? message.data
@@ -146,7 +147,7 @@ class ApiResponse {
         return this
     
       default:
-        throw new Error(`Unknown message type "${this._type}"`)
+        throw new ApiResponseException(`Unknown message type "${this._type}"`)
     }
   }
 
@@ -156,7 +157,7 @@ class ApiResponse {
    */
   setType( type ){
     if ( this._types.includes(type) === false ) {
-      throw new Error(`Response type "${type}" not in [ ${this._types.join(', ')}]`)
+      throw new ApiResponseException(`Response type "${type}" not in [ ${this._types.join(', ')}]`)
     }
     // Convert an existing message to json
     if ( type === 'json' && this._message instanceof Message === false ) {
@@ -169,4 +170,4 @@ class ApiResponse {
 
 ApiResponse._classInit()
 
-module.exports = { ApiResponse, Message, MessageData, MessageError }
+module.exports = { ApiResponse, ApiResponseException, Message, MessageData, MessageError }

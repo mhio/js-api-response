@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@mhio/class-debug": "^0.1.0",
+    "@mhio/exception": "^0.1.5",
     "@mhio/message": "^0.3.0",
     "lodash.defaults": "^4.2.0"
   },
