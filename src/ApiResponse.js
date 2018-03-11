@@ -3,6 +3,7 @@ const { Message, MessageData, MessageError } = require('@mhio/message')
 const { Exception } = require('@mhio/exception')
 const defaults = require('lodash.defaults')
 
+/** Local Exceptions */
 class ApiResponseException extends Exception {}
 
 /** Class to encapsulate a response */
@@ -124,7 +125,7 @@ class ApiResponse {
           message instanceof Buffer === false
         ) {
           throw new ApiResponseException(
-            `Raw responses must be a String or Buffer, got ${typeof message}. ${message.constructor.name}`,
+            `Raw responses must be a String or Buffer, got ${typeof message}. ${message.constructor.name}`
           )
         }
         this._message = message

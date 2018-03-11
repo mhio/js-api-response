@@ -1,3 +1,21 @@
+## Classes
+
+<dl>
+<dt><a href="#ApiResponseException">ApiResponseException</a></dt>
+<dd><p>Local Exceptions</p></dd>
+<dt><a href="#ApiResponse">ApiResponse</a></dt>
+<dd><p>Class to encapsulate a response</p></dd>
+</dl>
+
+<a name="ApiResponseException"></a>
+
+## ApiResponseException
+<p>Local Exceptions</p>
+
+**Kind**: global class  
+
+* * *
+
 <a name="ApiResponse"></a>
 
 ## ApiResponse
