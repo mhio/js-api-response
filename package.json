@@ -3,7 +3,7 @@
   "version": "0.2.8",
   "description": "API Response Class",
   "main": "src/ApiResponse.js",
-  "repository": "https://github.com/mh/js-api-response",
+  "repository": "https://github.com/mhio/js-api-response",
   "author": "Matt Hoyle",
   "license": "MIT",
   "private": false,
